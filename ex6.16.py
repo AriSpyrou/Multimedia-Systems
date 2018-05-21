@@ -29,3 +29,4 @@ for i in range(img.shape[0]):
 file = open('compressed_img', 'w')
 file.write(output)
 file.close()
+print('ok')
