@@ -2,14 +2,14 @@ from PIL import Image
 import numpy as np
 
 Q_PARAMETER = 10
-IMAGE_PATH = 'images/img3.jpg'
+IMAGE_PATH = 'images/img1.jpg'
 
 img = np.array(Image.open(IMAGE_PATH).convert('L'))
 img[0, 0] = int(round(img[0, 0] / Q_PARAMETER))
 start_flag = True
 run = img[0, 0]
-length = 0
-output = '10|'
+length = 1
+output = str(img.shape[0]) + 'x' + str(img.shape[1]) + '|' + str(Q_PARAMETER) + '|'
 for i in range(img.shape[0]):
     for j in range(img.shape[1]):
         if start_flag:
@@ -29,4 +29,3 @@ for i in range(img.shape[0]):
 file = open('compressed_img', 'w')
 file.write(output)
 file.close()
-print('ok')
