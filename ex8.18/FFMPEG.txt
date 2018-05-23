@@ -1,0 +1,1 @@
+ffmpeg -ss 00:00:01 -t 00:00:02 -i input.mp4 -vf "crop=500:750:1420:0, format=gray" output.mp4
