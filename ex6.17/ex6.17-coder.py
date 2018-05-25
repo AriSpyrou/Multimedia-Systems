@@ -10,7 +10,7 @@ ret, first_frame = vid.read()
 first_frame = cv2.cvtColor(first_frame, cv2.COLOR_BGR2GRAY)  # first frame is passed as it is
 
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('quantized.avi', fourcc, 25.0, (790, 834))
+out = cv2.VideoWriter('quantized.avi', fourcc, int(vid.get(5)), (int(vid.get(3)), int(vid.get(4))), False)
 out.write(first_frame)
 
 prev_frame = first_frame
