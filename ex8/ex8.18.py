@@ -3,7 +3,7 @@ import cv2
 import time
 
 # Program parameters
-MACROBLOCK_SIZE = 24
+MACROBLOCK_SIZE = 16
 K = 16
 
 # Variables meant for output purposes
