@@ -12,15 +12,6 @@ start = time.time()
 frames = 1
 
 
-def mean_squared_error(alpha, beta):  # MSE metric (not used)
-    mse = 0
-    n = alpha.shape[0]
-    for i in range(n):
-        for j in range(n):
-            mse += (alpha[i, j] - beta[i, j]) ** 2
-    return mse * (n ** -2)
-
-
 def sum_absolute_differences(alpha, beta):  # SAD metric
     sad = 0
     n = alpha.shape[0]
@@ -63,31 +54,30 @@ def compute_motion_vector(macroblock, ref, crds):  # Computes the motion vector 
 
 # Open the video and read the first frame which will be used as the background
 vid = cv2.VideoCapture('input.mp4')
-ret, bg_f = vid.read()
-bg_f = cv2.cvtColor(bg_f, cv2.COLOR_BGR2GRAY)
 # Initialize the video writer and write the background frame
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('m' + str(MACROBLOCK_SIZE) + 'k' + str(K) + '.avi', fourcc, vid.get(5),
+out = cv2.VideoWriter('8-17b.avi', fourcc, vid.get(5),
                       (int(vid.get(3)), int(vid.get(4))), False)
-out.write(bg_f)
-bg_f = fix_frame_shape(bg_f)
-
-r_frame = bg_f
+ret, r_frame = vid.read()
+r_frame = fix_frame_shape(cv2.cvtColor(r_frame, cv2.COLOR_BGR2GRAY))
 while vid.isOpened():
     ret, c_frame = vid.read()
     if not ret:
         break
     c_frame = cv2.cvtColor(c_frame, cv2.COLOR_BGR2GRAY)
     c_frame = fix_frame_shape(c_frame)
+    temp = np.zeros((r_frame.shape[0], r_frame.shape[1]), dtype=np.uint8)
     for i in range(0, c_frame.shape[0], MACROBLOCK_SIZE):
         for j in range(0, c_frame.shape[1], MACROBLOCK_SIZE):
             motion_v = compute_motion_vector(c_frame[i:i+MACROBLOCK_SIZE, j:j+MACROBLOCK_SIZE], r_frame, (i, j))
-            if motion_v[0] + motion_v[1] != 0:
-                c_frame[i:i+MACROBLOCK_SIZE, j:j+MACROBLOCK_SIZE] = bg_f[i:i+MACROBLOCK_SIZE, j:j+MACROBLOCK_SIZE]
+            cv2.subtract(c_frame[i:i + MACROBLOCK_SIZE, j:j + MACROBLOCK_SIZE],
+                         r_frame[i + motion_v[0]:i + MACROBLOCK_SIZE + motion_v[0],
+                                 j + motion_v[1]:j + MACROBLOCK_SIZE + motion_v[1]],
+                         temp[i:i+MACROBLOCK_SIZE, j:j+MACROBLOCK_SIZE])
     r_frame = c_frame
-    c_frame = np.delete(c_frame, slice(int(vid.get(4)), None), 0)
-    c_frame = np.delete(c_frame, slice(int(vid.get(3)), None), 1)
-    out.write(c_frame)
+    temp = np.delete(temp, slice(int(vid.get(4)), None), 0)
+    temp = np.delete(temp, slice(int(vid.get(3)), None), 1)
+    out.write(temp)
     ########
     frames += 1
     print('Frames Processed: ' + str(frames))
@@ -100,7 +90,7 @@ print('----- ' + str(round(time.time() - start)) + 's -----')
 # If PLAYBACK is set to True once the process is finished the video will play in its totality.
 # Otherwise you can also play it with a media player program
 if PLAYBACK:
-    vid = cv2.VideoCapture('m' + str(MACROBLOCK_SIZE) + 'k' + str(K) + '.avi')
+    vid = cv2.VideoCapture('8-17b.avi')
     while vid.isOpened():
         ret, frame = vid.read()
         if not ret:
@@ -111,4 +101,3 @@ if PLAYBACK:
             break
     vid.read()
     cv2.destroyAllWindows()
-

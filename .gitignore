@@ -1,5 +1,5 @@
 .ignored/
 .idea/
 compressed*
-input.mp4
-m*
+*.mp4
+*.avi
