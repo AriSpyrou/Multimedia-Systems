@@ -32,7 +32,7 @@ while vid.isOpened():
 
 vid.release()
 out.release()
-print('----- ' + str(round((time.time() - start), 2)) + 's -----')
+print('Time elapsed: ' + str(round((time.time() - start), 2)) + 's')
 
 # If PLAYBACK is set to True once the process is finished the video will play in its totality.
 # Otherwise you can also play it with a media player program

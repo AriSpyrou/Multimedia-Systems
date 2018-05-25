@@ -2,8 +2,8 @@ import cv2
 
 # Program parameters
 Q_PARAMETER = 10
-GOP_MODE = True
-GOP_SIZE = 1
+GOP_MODE = False
+GOP_SIZE = 4
 
 
 f_cnt = 1
