@@ -22,12 +22,12 @@ while vid.isOpened():
     c_frame = cv2.cvtColor(c_frame, cv2.COLOR_BGR2GRAY)
     if GOP_MODE:
         if f_cnt % GOP_SIZE != 0:
-            diff = (c_frame - prev_frame // Q_PARAMETER)
+            diff = (c_frame - prev_frame) // Q_PARAMETER
             out.write(diff)
         else:
             out.write(c_frame)
     else:
-        diff = (c_frame - prev_frame // Q_PARAMETER)
+        diff = (c_frame - prev_frame) // Q_PARAMETER
         out.write(diff)
     prev_frame = c_frame
 
