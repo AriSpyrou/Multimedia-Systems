@@ -1,15 +1,18 @@
 from PIL import Image
 import numpy as np
+import time
 
 Q_PARAMETER = 10
+N_FRAMES = 60
 IMAGE_PATH = 'frames/'
 DEST_PATH = 'compressed_frames/'
 IMAGE_NAME = 'frame_'
 IMAGE_TYPE = '.bmp'
-N_FRAMES = 60
 
-for frame in range(1, N_FRAMES + 1):
-    img = np.array(Image.open(IMAGE_PATH + IMAGE_NAME + str(frame) + IMAGE_TYPE).convert('L'))
+start = time.time()
+
+for frames in range(1, N_FRAMES + 1):
+    img = np.array(Image.open(IMAGE_PATH + IMAGE_NAME + str(frames) + IMAGE_TYPE).convert('L'))
     img[0, 0] = int(round(img[0, 0] / Q_PARAMETER))
     start_flag = True
     run = img[0, 0]
@@ -36,6 +39,9 @@ for frame in range(1, N_FRAMES + 1):
         output += str(run) + ',' + str(length) + ';'
     else:
         output += str(run) + ';'
-    file = open(DEST_PATH + 'compressed_' + IMAGE_NAME + str(frame), 'w')
+    print('Frames Processed: ' + str(frames))
+    file = open(DEST_PATH + 'compressed_' + IMAGE_NAME + str(frames), 'w')
     file.write(output)
     file.close()
+
+print('-----' + str(time.time()-start) + '-----')
