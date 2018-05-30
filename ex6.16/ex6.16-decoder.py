@@ -2,7 +2,8 @@ from PIL import Image
 import numpy as np
 
 PATH = './compressed_'
-NAME = 'img1'
+NAME = 'gimg1'
+
 
 buf = open(PATH + NAME, 'r').read()
 buf = buf.split('|', 2)

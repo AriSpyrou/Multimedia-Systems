@@ -3,8 +3,9 @@ import numpy as np
 
 Q_PARAMETER = 10
 IMAGE_PATH = '../images/'
-IMAGE_NAME = 'img1'
+IMAGE_NAME = 'gimg1'
 IMAGE_TYPE = '.bmp'
+
 
 img = np.array(Image.open(IMAGE_PATH + IMAGE_NAME + IMAGE_TYPE).convert('L'))
 img[0, 0] = int(round(img[0, 0] / Q_PARAMETER))
