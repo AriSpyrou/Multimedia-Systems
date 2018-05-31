@@ -9,8 +9,8 @@ DEST_PATH = 'compressed_frames/'
 IMAGE_NAME = 'frame_'
 IMAGE_TYPE = '.bmp'
 
-start = time.time()
 
+start = time.time()
 for frames in range(1, N_FRAMES + 1):
     img = np.array(Image.open(IMAGE_PATH + IMAGE_NAME + str(frames) + IMAGE_TYPE).convert('L'))
     img[0, 0] = int(round(img[0, 0] / Q_PARAMETER))
@@ -23,7 +23,6 @@ for frames in range(1, N_FRAMES + 1):
             if start_flag:
                 start_flag = False
                 continue
-
             img[i, j] = int(round(img[i, j] / Q_PARAMETER))
             if img[i, j] != run:
                 if length != 1:
@@ -43,5 +42,4 @@ for frames in range(1, N_FRAMES + 1):
     file = open(DEST_PATH + 'compressed_' + IMAGE_NAME + str(frames), 'w')
     file.write(output)
     file.close()
-
-print('-----' + str(time.time()-start) + '-----')
+print('-----' + str(time.time() - start) + '-----')
