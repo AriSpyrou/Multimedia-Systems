@@ -1,7 +1,7 @@
 import cv2
 
 VIDEO_NAME = 'input'
-VIDEO_TYPE = '.mp4'
+VIDEO_TYPE = '.avi'
 FRAME_SAVE_DEST = 'frames/'
 f_cnt = 1
 

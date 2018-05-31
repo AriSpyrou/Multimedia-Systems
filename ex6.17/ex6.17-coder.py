@@ -1,7 +1,7 @@
 import cv2
 
 # Program parameters
-Q_PARAMETER = 10
+Q_PARAMETER = 1
 GOP_MODE = False
 GOP_SIZE = 4
 

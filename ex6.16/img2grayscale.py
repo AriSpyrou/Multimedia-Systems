@@ -4,7 +4,7 @@ _IMAGE_DICT = {'jpg': 'JPEG',
                'bmp': 'BMP'}
 
 IMAGE_PATH = '../images/'
-IMAGE_NAME = 'img2'
+IMAGE_NAME = 'img3'
 IMAGE_NEW_NAME = 'g' + IMAGE_NAME
 IMAGE_TYPE = 'bmp'
 OVERWRITE = False
