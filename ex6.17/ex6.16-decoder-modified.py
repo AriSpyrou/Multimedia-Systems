@@ -60,6 +60,6 @@ for frames in range(1, N_FRAMES + 1):
     frame = img_array
     out.write(img_array)
     print('Frames Processed: ' + str(frames))
-print('-----' + str(time.time() - start) + '-----')
+print('Time elapsed: ' + str(round((time.time() - start), 2)) + 's')
 cv2.destroyAllWindows()
 out.release()

@@ -5,20 +5,11 @@ import time
 # Program parameters
 MACROBLOCK_SIZE = 16
 K = 16
-PLAYBACK = False
+PLAYBACK = True
 
 # Variables meant for output purposes
 start = time.time()
 frames = 1
-
-
-def mean_squared_error(alpha, beta):  # MSE metric (not used)
-    mse = 0
-    n = alpha.shape[0]
-    for i in range(n):
-        for j in range(n):
-            mse += (alpha[i, j] - beta[i, j]) ** 2
-    return mse * (n ** -2)
 
 
 def sum_absolute_differences(alpha, beta):  # SAD metric
@@ -88,14 +79,12 @@ while vid.isOpened():
     c_frame = np.delete(c_frame, slice(int(vid.get(4)), None), 0)
     c_frame = np.delete(c_frame, slice(int(vid.get(3)), None), 1)
     out.write(c_frame)
-    ########
     frames += 1
     print('Frames Processed: ' + str(frames))
-    ########
 
 vid.release()
 out.release()
-print('----- ' + str(round(time.time() - start)) + 's -----')
+print('Time elapsed: ' + str(round(time.time() - start)) + 's')
 
 # If PLAYBACK is set to True once the process is finished the video will play in its totality.
 # Otherwise you can also play it with a media player program

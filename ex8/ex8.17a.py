@@ -3,11 +3,10 @@ import cv2
 import time
 
 # Program parameters
-PLAYBACK = False
+PLAYBACK = True
 
 # Variables meant for output purposes
 start = time.time()
-frames = 0
 
 # Open the video and read the first frame which will be used as the background
 vid = cv2.VideoCapture('input.mp4')
@@ -25,10 +24,6 @@ while vid.isOpened():
     c_frame = cv2.cvtColor(c_frame, cv2.COLOR_BGR2GRAY)
     out.write(np.subtract(c_frame, r_frame))
     r_frame = c_frame
-    ########
-    frames += 1
-    print('Frames Processed: ' + str(frames))
-    ########
 
 vid.release()
 out.release()

@@ -1,7 +1,7 @@
 import cv2
 
 # Program parameters
-Q_PARAMETER = 1
+Q_PARAMETER = 10
 GOP_MODE = False
 GOP_SIZE = 4
 
@@ -9,7 +9,7 @@ GOP_SIZE = 4
 f_cnt = 1
 vid = cv2.VideoCapture('input.avi')
 ret, prev_frame = vid.read()
-prev_frame = cv2.cvtColor(prev_frame, cv2.COLOR_BGR2GRAY)  # first frame is passed as it is
+prev_frame = cv2.cvtColor(prev_frame, cv2.COLOR_BGR2GRAY)
 
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter('quantized.avi', fourcc, int(vid.get(5)), (int(vid.get(3)), int(vid.get(4))), False)

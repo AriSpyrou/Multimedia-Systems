@@ -5,7 +5,7 @@ import time
 # Program parameters
 MACROBLOCK_SIZE = 16
 K = 16
-PLAYBACK = False
+PLAYBACK = True
 
 # Variables meant for output purposes
 start = time.time()
@@ -78,10 +78,8 @@ while vid.isOpened():
     temp = np.delete(temp, slice(int(vid.get(4)), None), 0)
     temp = np.delete(temp, slice(int(vid.get(3)), None), 1)
     out.write(temp)
-    ########
     frames += 1
     print('Frames Processed: ' + str(frames))
-    ########
 
 vid.release()
 out.release()

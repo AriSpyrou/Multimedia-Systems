@@ -42,4 +42,4 @@ for frames in range(1, N_FRAMES + 1):
     file = open(DEST_PATH + 'compressed_' + IMAGE_NAME + str(frames), 'w')
     file.write(output)
     file.close()
-print('-----' + str(time.time() - start) + '-----')
+print('Time elapsed: ' + str(round((time.time() - start), 2)) + 's')
